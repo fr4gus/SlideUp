@@ -1,0 +1,18 @@
+<resources>
+    <declare-styleable name="slideUp">
+        <attr name="contentView" format="reference" />
+        <attr name="headerView" format="reference" />
+        <attr name="contentOffset" format="dimension" />
+        <attr name="headerOffset" format="dimension" />
+        <attr name="headerScrollScale" format="float" />
+        <attr name="contentTouchMode">
+            <enum name="margin" value="0" />
+            <enum name="fullscreen" value="1" />
+        </attr>
+        <attr name="headerTouchMode">
+            <enum name="margin" value="0" />
+            <enum name="fullscreen" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>
