@@ -36,7 +36,7 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
 public class ContentView extends ViewGroup {
-    private static final String TAG = "CustomViewAbove";
+    private static final String TAG = "ContentView";
 
     private static final boolean DEBUG = true;
 
@@ -139,6 +139,8 @@ public class ContentView extends ViewGroup {
     private boolean mLastTouchAllowed = false;
 
     private int mSlidingMenuThreshold = 100;
+
+    private int mContentOffset;
 
     private HeaderView mCustomViewBehind2;
 
@@ -786,8 +788,10 @@ public class ContentView extends ViewGroup {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         // Make sure scroll position is set correctly.
-        if (w != oldw) {
-            recomputeScrollPosition(w, oldw, 0, 0);
+        if (h != oldh) {
+            completeScroll();
+            scrollTo(getScrollX(), getDestScrollY());
+            //            recomputeScrollPosition(0, 0, 0, 0);
         }
     }
 
@@ -962,8 +966,8 @@ public class ContentView extends ViewGroup {
 
     private boolean thisTouchAllowed(MotionEvent ev) {
         if (DEBUG) {
-            Log.d(TAG, "Event Y value: " + ev.getY() + "isHeader? " + isMenuOpen() + " item top"
-                    + getChildTop(getCurrentItem()));
+            Log.d(TAG, "Event Y value: " + ev.getY() + "isHeader? " + isMenuOpen() + " i" + getCurrentItem()
+                    + " item top" + getChildTop(getCurrentItem()));
 
         }
         if (isMenuOpen()) {
@@ -973,7 +977,7 @@ public class ContentView extends ViewGroup {
             case SlideUp.TOUCHMODE_MARGIN:
 
                 return ev.getY() >= getBehindHeight()
-                        && ev.getY() <= (getChildTop(getCurrentItem() + 1) + mSlidingMenuThreshold);
+                        && ev.getY() <= (getChildTop(getCurrentItem() + 1) + mSlidingMenuThreshold - mContentOffset);
             default:
                 return false;
             }
@@ -982,7 +986,7 @@ public class ContentView extends ViewGroup {
             case SlideUp.TOUCHMODE_FULLSCREEN:
                 return true;
             case SlideUp.TOUCHMODE_MARGIN:
-                return ev.getY() >= 0 && ev.getY() <= mSlidingMenuThreshold;
+                return ev.getY() >= 0 && ev.getY() <= (mSlidingMenuThreshold - mContentOffset);
             default:
                 return false;
             }
@@ -1017,8 +1021,8 @@ public class ContentView extends ViewGroup {
             return false;
         }
 
-        if (isBelowTouchArea(ev)){
-            if(DEBUG){
+        if (isBelowTouchArea(ev)) {
+            if (DEBUG) {
                 Log.d(TAG, "Is below touch area, ignore events and don't pass them");
             }
             return true;
@@ -1747,5 +1751,9 @@ public class ContentView extends ViewGroup {
             gravity = a.getInteger(0, Gravity.NO_GRAVITY);
             a.recycle();
         }
+    }
+
+    public void setContentOffset(int offset) {
+        mContentOffset = offset;
     }
 }

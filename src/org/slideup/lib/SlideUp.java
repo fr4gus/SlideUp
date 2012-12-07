@@ -64,6 +64,7 @@ public class SlideUp extends RelativeLayout {
         
         int offsetAbove = (int) ta.getDimension(R.styleable.slideUp_contentOffset, 0);
         setAboveOffset(offsetAbove);
+        mViewAbove.setContentOffset(offsetAbove);
         
         float scrollOffsetBehind = ta.getFloat(R.styleable.slideUp_headerScrollScale, 0.50f);
         setBehindScrollScale(scrollOffsetBehind);
@@ -76,9 +77,9 @@ public class SlideUp extends RelativeLayout {
 
     public void setViewAbove(View v) {
         mViewAbove.setContent(v);
-        mViewAbove.invalidate();
-        mViewAbove.dataSetChanged();
-        showAbove();
+//        mViewAbove.invalidate();
+//        mViewAbove.dataSetChanged();
+//        showAbove();
     }
 
     public void setViewBehind(int res) {
@@ -87,8 +88,8 @@ public class SlideUp extends RelativeLayout {
 
     public void setViewBehind(View v) {
         mViewBehind.setContent(v);
-        mViewBehind.invalidate();
-        mViewBehind.dataSetChanged();
+//        mViewBehind.invalidate();
+//        mViewBehind.dataSetChanged();
     }
 
     public void setSlidingEnabled(boolean b) {
