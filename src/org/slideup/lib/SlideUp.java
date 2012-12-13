@@ -68,7 +68,6 @@ public class SlideUp extends RelativeLayout {
         
         float scrollOffsetBehind = ta.getFloat(R.styleable.slideUp_headerScrollScale, 0.50f);
         setBehindScrollScale(scrollOffsetBehind);
-        showBehind();
     }
 
     public void setViewAbove(int res) {
@@ -77,9 +76,6 @@ public class SlideUp extends RelativeLayout {
 
     public void setViewAbove(View v) {
         mViewAbove.setContent(v);
-//        mViewAbove.invalidate();
-//        mViewAbove.dataSetChanged();
-//        showAbove();
     }
 
     public void setViewBehind(int res) {
@@ -88,8 +84,6 @@ public class SlideUp extends RelativeLayout {
 
     public void setViewBehind(View v) {
         mViewBehind.setContent(v);
-//        mViewBehind.invalidate();
-//        mViewBehind.dataSetChanged();
     }
 
     public void setSlidingEnabled(boolean b) {
@@ -98,25 +92,6 @@ public class SlideUp extends RelativeLayout {
 
     public boolean isSlidingEnabled() {
         return mViewAbove.isSlidingEnabled();
-    }
-
-    /**
-     * 
-     * @param b Whether or not the SlidingMenu is in a static mode 
-     * (i.e. nothing is moving and everything is showing)
-     */
-    public void setStatic(boolean b) {
-        if (b) {
-            setSlidingEnabled(false);
-            mViewAbove.setCustomViewBehind2(null);
-            mViewAbove.setCurrentItem(1);
-            mViewBehind.setCurrentItem(0);
-        } else {
-            mViewAbove.setCurrentItem(1);
-            mViewBehind.setCurrentItem(1);
-            mViewAbove.setCustomViewBehind2(mViewBehind);
-            setSlidingEnabled(true);
-        }
     }
 
     /**
@@ -185,7 +160,6 @@ public class SlideUp extends RelativeLayout {
      */
     public void setAboveOffset(int offset){
         RelativeLayout.LayoutParams params = ((RelativeLayout.LayoutParams) mViewAbove.getLayoutParams());
-//        int top = params.topMargin;
         int left = params.leftMargin;
         int right = params.rightMargin;
         int bottom = params.bottomMargin + offset;
@@ -224,18 +198,6 @@ public class SlideUp extends RelativeLayout {
         }
         mViewAbove.setTouchModeBehind(i);
     }
-
-    //    public void setShadowDrawable(int resId) {
-    //       mViewAbove.setShadowDrawable(resId);
-    //    }
-
-    //    public void setShadowWidthRes(int resId) {
-    //        setShadowWidth((int) getResources().getDimension(resId));
-    //    }
-
-    //    public void setShadowWidth(int pixels) {
-    //        mViewAbove.setShadowWidth(pixels);
-    //    }
 
     public void setFadeEnabled(boolean b) {
         mViewAbove.setBehindFadeEnabled(b);
