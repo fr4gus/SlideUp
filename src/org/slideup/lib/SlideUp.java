@@ -20,6 +20,8 @@ public class SlideUp extends RelativeLayout {
     private ContentView mViewAbove;
 
     private HeaderView mViewBehind;
+    
+    int offsetContent;
 
     public SlideUp(Context context) {
         this(context, null);
@@ -63,7 +65,7 @@ public class SlideUp extends RelativeLayout {
         setBehindOffset(offsetBehind);
         
         int offsetAbove = (int) ta.getDimension(R.styleable.slideUp_contentOffset, 0);
-        setAboveOffset(offsetAbove);
+//        setAboveOffset(offsetAbove);
         mViewAbove.setContentOffset(offsetAbove);
         
         float scrollOffsetBehind = ta.getFloat(R.styleable.slideUp_headerScrollScale, 0.50f);
@@ -154,18 +156,23 @@ public class SlideUp extends RelativeLayout {
         return mViewAbove.getScrollScale();
     }
 
-    /**
-     * 
-     * @param offest
-     */
-    public void setAboveOffset(int offset){
-        RelativeLayout.LayoutParams params = ((RelativeLayout.LayoutParams) mViewAbove.getLayoutParams());
-        int left = params.leftMargin;
-        int right = params.rightMargin;
-        int bottom = params.bottomMargin + offset;
-        ((RelativeLayout.LayoutParams) mViewAbove.getLayoutParams()).setMargins(left, offset, right, bottom);
-        
-    }
+//    /**
+//     * 
+//     * @param offset
+//     */
+//    public void setAboveOffset(int offset){
+//    	offsetContent = offset;
+//    	mViewAbove.setOf
+////        RelativeLayout.LayoutParams params = ((RelativeLayout.LayoutParams) mViewAbove.getLayoutParams());
+////        int left = params.leftMargin;
+////        int right = params.rightMargin;
+//////        int bottom = params.bottomMargin + offset;
+////        int bottom = params.bottomMargin;
+////        int top = params.topMargin + offset;
+//////        ((RelativeLayout.LayoutParams) mViewAbove.getLayoutParams()).setMargins(left, offset, right, bottom);
+////        ((RelativeLayout.LayoutParams) mViewAbove.getLayoutParams()).setMargins(left, top, right, bottom);
+//        
+//    }
     /**
      * 
      * @param f The scale of the parallax scroll (i.e. 1.0f scrolls 1 pixel for every
